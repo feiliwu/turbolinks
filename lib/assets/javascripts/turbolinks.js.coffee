@@ -86,10 +86,12 @@ fetchReplacement = (url, onLoadFunction, showProgressBar = true) ->
 
 fetchHistory = (cachedPage) ->
   xhr?.abort()
-  changePage cachedPage.title, cachedPage.body
-  recallScrollPosition cachedPage
-  triggerEvent EVENTS.RESTORE
-
+  $('body').hide()
+  setTimeout (->
+    changePage cachedPage.title, cachedPage.body
+    triggerEvent EVENTS.RESTORE
+    recallScrollPosition cachedPage
+  ), 100
 
 cacheCurrentPage = ->
   currentStateUrl = new ComponentUrl currentState.url
